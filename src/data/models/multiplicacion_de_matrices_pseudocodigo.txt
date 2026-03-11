@@ -1,0 +1,34 @@
+ALGORITMO MultiplicacionMatricesOptimizado
+ENTRADA: Entero n (tamaño de la matriz)
+
+    // 1. Preparación de datos
+    A <- CrearMatrizAleatoria(n, n)
+    B <- CrearMatrizAleatoria(n, n)
+    
+    // 2. Transposición de la matriz B para optimizar acceso a memoria
+    B_T <- Matriz vacía de tamaño n x n
+    PARA i DESDE 0 HASTA n-1 HACER
+        PARA j DESDE 0 HASTA n-1 HACER
+            B_T[j][i] <- B[i][j]
+        FIN PARA
+    FIN PARA
+
+    // 3. Multiplicación propiamente dicha
+    C <- Matriz vacía de tamaño n x n llena de ceros
+    
+    PARA i DESDE 0 HASTA n-1 HACER (Recorrer filas de A)
+        filaA <- A[i]
+        PARA j DESDE 0 HASTA n-1 HACER (Recorrer filas de B_T, que son columnas de B)
+            columnaB <- B_T[j]
+            suma <- 0
+            
+            PARA k DESDE 0 HASTA n-1 HACER (Producto punto)
+                suma <- suma + (filaA[k] * columnaB[k])
+            FIN PARA
+            
+            C[i][j] <- suma
+        FIN PARA
+    FIN PARA
+
+    RETORNAR C
+FIN ALGORITMO
